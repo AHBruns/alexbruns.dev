@@ -18,7 +18,7 @@ jobs:
           sparse-checkout: |
             src
             public
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-cache
@@ -31,28 +31,24 @@ jobs:
         with:
           sparse-checkout: |
             migrations
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-cache
       - run: npm install --global --prefer-offline vercel@latest
       - run: vercel env pull --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - id: cache-direnv
-        uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         with:
           path: /opt/pipx_bin/direnv
           key: ${{ runner.os }}-direnv
-      - if: ${{ steps.cache-direnv.outputs.cache-hit != 'true' }}
-        run: curl -sfL https://direnv.net/install.sh | bash
+          fail-on-cache-miss: true
       - run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           direnv allow .
           direnv export gha > "$GITHUB_ENV"
-      - id: cache-atlas
-        uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         with:
           path: /usr/local/bin/atlas
           key: ${{ runner.os }}-atlas
-      - if: ${{ steps.cache-atlas.outputs.cache-hit != 'true' }}
-        run: curl -sSf https://atlasgo.sh | sh
+          fail-on-cache-miss: true
       - run: atlas migrate apply --url $DATABASE_URL --revisions-schema "public" --dir "file://migrations"

@@ -1,0 +1,29 @@
+name: cache-cron
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  npm-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install --global --prefer-online vercel@latest
+      - uses: actions/cache/save@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache
+  atlas:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -sSf https://atlasgo.sh | sh
+      - uses: actions/cache/save@v4
+        with:
+          path: /usr/local/bin/atlas
+          key: ${{ runner.os }}-atlas
+  direnv:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -sfL https://direnv.net/install.sh | bash
+      - uses: actions/cache/save@v4
+        with:
+          path: /opt/pipx_bin/direnv
+          key: ${{ runner.os }}-direnv
