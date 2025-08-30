@@ -1,4 +1,4 @@
-name: deploy
+name: deploy-production
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -7,7 +7,7 @@ on:
     branches:
       - main
 concurrency:
-  group: production-deploy-workflows
+  group: deploy-production-workflows
   cancel-in-progress: false
 jobs:
   deploy-code:
