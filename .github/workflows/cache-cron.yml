@@ -3,7 +3,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
-
 jobs:
   npm-cache:
     runs-on: ubuntu-latest
@@ -17,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: curl -sSf https://atlasgo.sh | sh
+      - run: |
+          cat /usr/local/bin/atlas
+          echo ${{ hashFiles('/usr/local/bin/atlas') }}
       - uses: actions/cache/save@v4
         with:
           path: /usr/local/bin/atlas
