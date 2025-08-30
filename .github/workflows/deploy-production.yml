@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ariga/setup-atlas@v0
       - run: npm install -g vercel@latest
       - run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
   run-migrations:
