@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: npm install --global --prefer-online vercel@latest
-      - run: cp ~/.npm .
+      - run: cp -r ~/.npm .
       - uses: actions/cache/save@v4
         with:
           path: ~/.npm
