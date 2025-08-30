@@ -12,7 +12,7 @@ jobs:
       - uses: actions/cache/save@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-cache
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('~/.npm/**/*') }}
   atlas:
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache/save@v4
         with:
           path: /usr/local/bin/atlas
-          key: ${{ runner.os }}-atlas
+          key: ${{ runner.os }}-atlas-${{ hashFiles('/usr/local/bin/atlas') }}
   direnv:
     runs-on: ubuntu-latest
     steps:
@@ -28,4 +28,4 @@ jobs:
       - uses: actions/cache/save@v4
         with:
           path: /opt/pipx_bin/direnv
-          key: ${{ runner.os }}-direnv
+          key: ${{ runner.os }}-direnv-${{ hashFiles('/opt/pipx_bin/direnv') }}
