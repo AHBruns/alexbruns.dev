@@ -32,4 +32,4 @@ jobs:
           direnv allow .
           direnv export gha > "$GITHUB_ENV"
       - run: curl -sSf https://atlasgo.sh | sh
-      - run: atlas migrate apply --url $DB_URL --revisions-schema "public" --dir "file://migrations"
+      - run: atlas migrate apply --url $DATABASE_URL --revisions-schema "public" --dir "file://migrations"
