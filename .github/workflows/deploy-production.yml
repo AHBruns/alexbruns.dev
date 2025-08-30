@@ -18,6 +18,10 @@ jobs:
           sparse-checkout: |
             src
             public
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache
       - run: npm install -g vercel@latest
       - run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
   run-migrations:
@@ -27,6 +31,10 @@ jobs:
         with:
           sparse-checkout: |
             migrations
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache
       - run: npm install -g vercel@latest
       - run: vercel env pull --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - run: |
