@@ -8,26 +8,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: npm install --global --prefer-online vercel@latest
+      - run: cp ~/.npm .
       - uses: actions/cache/save@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('~/.npm/**/*') }}
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('.npm') }}
   atlas:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: curl -sSf https://atlasgo.sh | sh
-      - run: |
-          cat /usr/local/bin/atlas
-          echo ${{ hashFiles('/usr/local/bin/atlas') }}
+      - run: cp /usr/local/bin/atlas .
       - uses: actions/cache/save@v4
         with:
           path: /usr/local/bin/atlas
-          key: ${{ runner.os }}-atlas-${{ hashFiles('/usr/local/bin/atlas') }}
+          key: ${{ runner.os }}-atlas-${{ hashFiles('atlas') }}
   direnv:
     runs-on: ubuntu-latest
     steps:
       - run: curl -sfL https://direnv.net/install.sh | bash
+      - run: cp /opt/pipx_bin/direnv .
       - uses: actions/cache/save@v4
         with:
           path: /opt/pipx_bin/direnv
-          key: ${{ runner.os }}-direnv-${{ hashFiles('/opt/pipx_bin/direnv') }}
+          key: ${{ runner.os }}-direnv-${{ hashFiles('direnv') }}
