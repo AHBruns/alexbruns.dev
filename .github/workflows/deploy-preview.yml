@@ -1,0 +1,35 @@
+name: deploy
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches-ignore:
+      - main
+concurrency:
+  group: production-deploy-workflows
+  cancel-in-progress: false
+jobs:
+  deploy-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ariga/setup-atlas@v0
+      - run: npm install -g vercel@latest
+      - run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+  run-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g vercel@latest
+      - run: vercel env pull --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - run: |
+          curl -sfL https://direnv.net/install.sh | bash
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - run: |
+          direnv allow .
+          direnv export gha > "$GITHUB_ENV"
+      - run: curl -sSf https://atlasgo.sh | sh
+      - run: atlas migrate apply --url $DATABASE_URL --revisions-schema "public" --dir "file://migrations"
