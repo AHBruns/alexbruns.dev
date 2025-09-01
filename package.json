@@ -6,12 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "migrate": "atlas migrate apply --url $DB_URL --revisions-schema \"public\" --dir \"file://migrations\""
+    "migrate": "atlas migrate apply --url $DATABASE_URL --revisions-schema \"public\" --dir \"file://migrations\""
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
+    "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.2"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
