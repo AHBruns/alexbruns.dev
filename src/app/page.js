@@ -1,3 +1,9 @@
+import { Waitlist } from "@clerk/nextjs";
+
 export default function Page() {
-  return <div>Coming soon!</div>;
+  return (
+    <div className="grid place-items-center h-full">
+      <Waitlist />
+    </div>
+  );
 }

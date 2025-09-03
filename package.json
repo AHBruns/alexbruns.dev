@@ -9,14 +9,16 @@
     "migrate": "atlas migrate apply --url $DATABASE_URL --revisions-schema \"public\" --dir \"file://migrations\""
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.31.6",
     "@neondatabase/serverless": "^1.0.1",
     "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "uuid": "^11.1.0"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "@types/react": "19.1.12",
+    "tailwindcss": "^4",
+    "typescript": "5.9.2"
   }
 }
