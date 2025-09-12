@@ -1,3 +1,5 @@
-h1:/LF2+A4jhwPOhoPuVuTJcsbzw+w7Rs29/I1wxcsDcMo=
+h1:IgVBFmo4l/O+l9AFK5Wvu2GAvau/AWPXeROYV+C5lSQ=
 20250830025917_create_tags.sql h1:Yoxa9Z68ok8cBb0YK/x8wuTX8JVt/o6sG2A8fCVTdIk=
 20250910060626_finances.sql h1:hhm0Ud1Ilp7zND7tGfYkKyc8+2EYcmx/HmWSdFUNkVg=
+20250912072524_add_org_to_tags.sql h1:WWna7iCmpLac/JCsYTpe6JAMq4MOfs5nQ+LDmLUHl6Q=
+20250912075200_add_notes_to_tags.sql h1:ND0s++T+SVhp36GSmKHbefRHWuOT/50sd3DpTCHW6p4=

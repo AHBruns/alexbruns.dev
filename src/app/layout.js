@@ -1,5 +1,7 @@
 import {
   ClerkProvider,
+  OrganizationProfile,
+  OrganizationSwitcher,
   SignInButton,
   SignUpButton,
   SignedIn,
@@ -28,13 +30,9 @@ export default function RootLayout({ children }) {
                   <Link href="/sign-in" className="text-gray-900 text-md">
                     Login
                   </Link>
-                  {/* <SignUpButton>
-                    <button className="bg-gray-900 text-white rounded-full px-5 py-2 text-md font-light">
-                      Sign Up
-                    </button>
-                  </SignUpButton> */}
                 </SignedOut>
                 <SignedIn>
+                  <OrganizationSwitcher />
                   <div className="bg-gray-900 p-px rounded-full grid place-items-center">
                     <UserButton />
                   </div>

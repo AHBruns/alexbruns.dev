@@ -7,6 +7,8 @@ COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 CREATE TABLE tags (
   id uuid NOT NULL,
+  organization_id text NOT NULL,
+  notes text NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 );
 
